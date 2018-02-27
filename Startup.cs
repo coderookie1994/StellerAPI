@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 
 using Docker.DotNet;
 using StellerAPI.StellerCore;
+using StellerAPI.Manager;
 
 namespace StellerAPI
 {
@@ -28,6 +29,16 @@ namespace StellerAPI
         {
             services.AddMvc();
             services.AddSingleton<IDockerClientWrapper, DockerClientWrapper>();
+            services.Configure<DbConnectionSettings>(options => {
+                options.ConnectionString = 
+                    Configuration.GetSection("MongoConnection:ConnectionString").Value;
+                options.Database = 
+                    Configuration.GetSection("MongoConnection:Database").Value;
+                
+                options.Collections = 
+                    Configuration.GetSection("MongoConnection:Collections").Get<Collections>();
+            });
+            services.AddTransient<IEnvironmentManager, EnvironmentManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
