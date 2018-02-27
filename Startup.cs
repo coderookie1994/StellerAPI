@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+using Docker.DotNet;
+using StellerAPI.StellerCore;
+
 namespace StellerAPI
 {
     public class Startup
@@ -24,6 +27,7 @@ namespace StellerAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<IDockerClientWrapper, DockerClientWrapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
