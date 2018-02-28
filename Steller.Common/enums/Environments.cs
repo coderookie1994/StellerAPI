@@ -1,7 +1,7 @@
 namespace StellerAPI.StellerCommon
 {
-    public enum Environments {
-        Python = 0,
-        Cplusplus
+    public static class Environments {
+        public const string Python = "336d482502ab";
+        public const string Cplusplus = "C++";
     };
 }
