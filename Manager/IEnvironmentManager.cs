@@ -6,5 +6,6 @@ namespace StellerAPI.Manager
 {
     public interface IEnvironmentManager {
         IMongoCollection<Environments> GetEnvironments();
+        void CreateContainer();
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Docker.DotNet;
 using StellerAPI.StellerCore;
 using StellerAPI.Manager;
+using StellerAPI.Repository;
 
 namespace StellerAPI
 {
@@ -39,6 +40,7 @@ namespace StellerAPI
                     Configuration.GetSection("MongoConnection:Collections").Get<Collections>();
             });
             services.AddTransient<IEnvironmentManager, EnvironmentManager>();
+            services.AddTransient<IContainerRepository, ContainerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
