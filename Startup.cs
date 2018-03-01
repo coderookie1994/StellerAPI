@@ -29,7 +29,7 @@ namespace StellerAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton<IDockerClientWrapper, DockerClientWrapper>();
+            services.AddSingleton<IDockerClientBuilder, DockerClientBuilder>();
             services.Configure<DbConnectionSettings>(options => {
                 options.ConnectionString = 
                     Configuration.GetSection("MongoConnection:ConnectionString").Value;
