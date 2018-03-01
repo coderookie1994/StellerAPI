@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using MongoDB.Driver;
 
 using StellerAPI.Models;
@@ -5,7 +6,7 @@ using StellerAPI.Models;
 namespace StellerAPI.Manager
 {
     public interface IEnvironmentManager {
-        IMongoCollection<Environments> GetEnvironments();
-        void CreateContainer();
+        Task<IMongoCollection<Environments>> GetEnvironments();
+        Task<bool> CreateContainer();
     }
 }

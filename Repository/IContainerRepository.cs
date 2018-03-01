@@ -7,6 +7,7 @@ namespace StellerAPI.Repository
     public interface IContainerRepository
     {
         Task<CreateContainerResponse> CreateContainer();
+        Task<bool> StartContainer(string containerId);
         // Task<IList<ImagesListResponse>> CreateContainer();
     }
 }

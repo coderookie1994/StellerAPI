@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using StellerAPI.StellerCore;
 using StellerAPI.Models;
 using StellerAPI.Repository;
+using Docker.DotNet.Models;
 
 namespace StellerAPI.Manager
 {
@@ -25,14 +26,20 @@ namespace StellerAPI.Manager
                 _database = _client.GetDatabase(settings.Value.Database);
         }
 
-        public IMongoCollection<Environments> GetEnvironments()
+        public async Task<IMongoCollection<Environments>> GetEnvironments()
         {
             return _database.GetCollection<Environments>(_settings.Value.Collections.Environments);
         }
 
-        public void CreateContainer()
+        public async Task<bool> CreateContainer()
         {
-            _repository.CreateContainer();
+            var createContainerResponse = await _repository.CreateContainer();
+            return await StartContainer(createContainerResponse);
+        }
+
+        private async Task<bool> StartContainer(CreateContainerResponse containerResponse)
+        {
+            return await _repository.StartContainer(containerResponse.ID);
         }
     }
 }
