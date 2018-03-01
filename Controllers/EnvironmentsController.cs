@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using StellerAPI.Manager;
 using StellerAPI.StellerCore;
 using StellerAPI.Models;
+using System.Threading.Tasks;
 
 namespace StellerAPI.Controllers
 {
@@ -19,15 +20,15 @@ namespace StellerAPI.Controllers
             _environmentManager = environmentManager;
         }
         [HttpGet]
-        public IMongoCollection<Environments> Get()
+        public async Task<IActionResult> Get()
         {
-            return _environmentManager.GetEnvironments();
+            return Ok(await _environmentManager.GetEnvironments());
         }
 
         [HttpPost]
-        public void Post([FromBody] string env) 
+        public async Task<IActionResult> Post([FromBody] string env) 
         {
-            _environmentManager.CreateContainer();
+            return Ok(await _environmentManager.CreateContainer());
         }
     }
 }
